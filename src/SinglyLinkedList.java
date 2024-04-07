@@ -169,5 +169,39 @@ public class SinglyLinkedList {
 
     }
 
+    //leet code 2. Add Two Numbers
+    /*
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode();
+        ListNode traverse = result;
+
+        int carry = 0;
+        while(l1 != null || l2!= null){
+            int firstDigit = (l1 != null) ? l1.val : 0;
+            int secondDigit = (l2 != null) ? l2.val : 0;
+
+            int sum = firstDigit + secondDigit + carry;
+            carry = sum / 10;
+            int lastDigit = sum % 10;
+
+            ListNode digit = new ListNode (lastDigit);
+            traverse.next = digit;
+
+            if(l1 != null)
+                l1 = l1.next;
+            if(l2 != null)
+                l2=l2.next;
+            traverse = traverse.next;
+        }
+        if(carry > 0){
+            ListNode newNode = new ListNode(carry);
+            traverse.next = newNode;
+            traverse = traverse.next;
+        }
+        return result.next;
+    }
+    */
+
+
 
 }
