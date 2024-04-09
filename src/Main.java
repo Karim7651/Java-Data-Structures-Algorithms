@@ -4,17 +4,13 @@ import java.util.Arrays;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        MinStack minStack = new MinStack();
-        minStack.push(5);
-        minStack.push(1);
-        System.out.println(minStack.min());
-        minStack.push(3);
-        minStack.push(0);
-        System.out.println(minStack.min());
-        minStack.pop();
-        minStack.pop();
-        minStack.pop();
-        minStack.pop();
-        System.out.println(minStack.min());
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.insert(7);
+        tree.insert(5);
+        tree.insert(4);
+        tree.insert(8);
+        tree.insert(9);
+        tree.levelTraversal();
+        tree.search(2);
     }
 }
