@@ -4,8 +4,8 @@ import java.util.Arrays;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        int[] x = {5,4,5,3,2,1,6,6,6,6,6,3,2,1,24};
-        Sorting.selectionSort(x);
+        int[] x = {5,4,0,1,3};
+        Sorting.mergeSort(x);
         Sorting.printArray(x);
     }
 }
