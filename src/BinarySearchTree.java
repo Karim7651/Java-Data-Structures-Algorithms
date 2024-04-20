@@ -104,37 +104,37 @@ public class BinarySearchTree {
             System.out.println("Node not found");
             return null;
         }
-        if (value < root.value) {
-            root.left = deleteNode(root.left, value);
-        } else if (value > root.value) {
-            root.right = deleteNode(root.right, value);
+        if (value < current.value) {
+            current.left = deleteNode(current.left, value);
+        } else if (value > current.value) {
+            current.right = deleteNode(current.right, value);
         } else {
             //node has two children
             /*1) find successor
              * 2) replace node to delete value with successor value
              * 3) delete successor*/
-            if (root.left != null && root.right != null) {
-                BinarySearchTreeNode temp = root;
-                BinarySearchTreeNode minimumNode = minimumNode(root.right);
-                root.value = minimumNode.value;
-                deleteNode(root.right, minimumNode.value);
+            if (current.left != null && current.right != null) {
+                BinarySearchTreeNode temp = current;
+                BinarySearchTreeNode minimumNode = minimumNode(current.right);
+                current.value = minimumNode.value;
+                deleteNode(current.right, minimumNode.value);
 
 
                 //node has one child
-            } else if (root.left != null) {
-                root = root.left;
+            } else if (current.left != null) {
+                current = current.left;
 
 
-            } else if (root.right != null) {
-                root = root.right;
+            } else if (current.right != null) {
+                current = current.right;
                 //leaf node
             } else {
-                root = null;
+                current = null;
             }
 
         }
         {
-            return root;
+            return current;
 
 
         }
