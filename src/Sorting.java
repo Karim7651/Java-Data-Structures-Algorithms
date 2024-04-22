@@ -75,7 +75,7 @@ public class Sorting {
         }
         mergeSort(leftHalf);
         mergeSort(rightHalf);
-        merge(leftHalf,rightHalf,array);
+        merge(leftHalf, rightHalf, array);
     }
 
     private static void merge(int[] leftHalf, int[] rightHalf, int[] inputArray) {
@@ -83,29 +83,64 @@ public class Sorting {
         int rightSize = rightHalf.length;
         //populate input array with sorted elements from leftHalf and rightHalf
         int i = 0, j = 0, k = 0;
-        while(i < leftSize && j <rightSize){
-            if(leftHalf[i] <= rightHalf[j]){
+        while (i < leftSize && j < rightSize) {
+            if (leftHalf[i] <= rightHalf[j]) {
                 inputArray[k] = leftHalf[i];
                 i++;
-            }else{
+            } else {
                 inputArray[k] = rightHalf[j];
                 j++;
             }
             k++;
         }
         //make sure there's nothing left in the left or right halves
-        while(i < leftSize){
+        while (i < leftSize) {
             inputArray[k] = leftHalf[i];
             k++;
             i++;
         }
-        while(j < rightSize){
+        while (j < rightSize) {
             inputArray[k] = rightHalf[j];
             k++;
             j++;
         }
 
 
+    }
+
+    public static void quickSort(int[] array) {
+        quickSort(array, 0, array.length - 1);
+    }
+
+    public static void quickSort(int[] array, int lowIndex, int highIndex) {
+        //when it comes to sorting one element
+        if(lowIndex >= highIndex)
+            return;
+        //choose pivot as last index always
+        int pivotValue = array[highIndex];
+        // partitioning (put elements less than pivotValue to the left of it and elements greater than pivot to the right of it)
+        int leftPointer = lowIndex;
+        int rightPointer = highIndex;
+        while(leftPointer < rightPointer){
+            while(array[leftPointer] <= pivotValue && leftPointer < rightPointer){
+                leftPointer++;
+            }
+            while(array[rightPointer] >= pivotValue && leftPointer < rightPointer){
+                rightPointer--;
+            }
+            swapNumbersInArray(array,leftPointer,rightPointer);
+        }
+        //swap leftPointer with pivot located at highIndex
+        swapNumbersInArray(array,leftPointer,highIndex);
+        //pivot is not at leftPointer Index
+        quickSort(array,lowIndex,leftPointer-1);
+        quickSort(array,leftPointer+1,highIndex);
+
+    }
+    private static void swapNumbersInArray(int[] array, int index1, int index2){
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
     }
 
     public static void printArray(int[] array) {
