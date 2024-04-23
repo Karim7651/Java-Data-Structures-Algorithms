@@ -10,6 +10,7 @@ public class Main {
         binaryHeap.insert(5);
         binaryHeap.insert(15);
         binaryHeap.insert(1);
+        binaryHeap.extractNode();
         binaryHeap.levelOrderTraversal();
     }
 }

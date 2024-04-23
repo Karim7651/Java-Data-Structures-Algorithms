@@ -68,5 +68,75 @@ public class BinaryHeap {
         arr[++sizeOfTree] = value;
         heapifyBottomToTop(sizeOfTree);
     }
+    //to remove elements
+    public void heapifyTopToBottom(int index){
+        int leftChild = 2*index;
+        int rightChild = 2*index + 1;
+        int swapChild = 0 ;
+        //no left child
+        if(sizeOfTree < leftChild){
+            return;
+        }
+        if(heapType.equals("Max")){
+            //has only left child
+            if(sizeOfTree == leftChild){
+                if(arr[index] < arr[leftChild]) {
+                    int temp = arr[index];
+                    arr[index] = arr[leftChild];
+                    arr[leftChild] = temp;
+                }
+                return;
+                //if it has two children
+            }else{
+                if(arr[leftChild] > arr[rightChild]){
+                    swapChild = leftChild;
+                }else{
+                    swapChild = rightChild;
+                }
+                //swap with appropriate child
+                if(arr[index] < arr[swapChild]){
+                    int temp = arr[index];
+                    arr[index] = arr[swapChild];
+                    arr[swapChild] = temp;
+                }
 
+            }
+
+        } else if (heapType.equals("Min")) {
+            //has only one child
+            if(sizeOfTree == leftChild){
+                if(arr[index] > arr[leftChild]){
+                    int temp = arr[index];
+                    arr[index] = arr[leftChild];
+                    arr[leftChild] = temp;
+                }
+                return;
+            }else{
+                if(arr[leftChild] > arr[rightChild]){
+                    swapChild = rightChild;
+                }else{
+                    swapChild = leftChild;
+                }
+                if(arr[index] > arr[swapChild]){
+                    int temp = arr[index];
+                    arr[index] = arr[swapChild];
+                    arr[swapChild] = temp;
+                }
+            }
+        }
+        heapifyTopToBottom(swapChild);
+    }
+    public int extractNode(){
+        if(isEmpty()){
+            System.out.println("heap is empty");
+            return -1;
+
+        }else{
+            int extractedValue = arr[1];
+            arr[1] = arr[sizeOfTree];
+            sizeOfTree--;
+            heapifyTopToBottom(1);
+            return extractedValue;
+        }
+    }
 }
