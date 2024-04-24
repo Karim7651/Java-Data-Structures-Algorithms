@@ -4,13 +4,9 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-
-        BinaryHeap binaryHeap = new BinaryHeap(10,"Max");
-        binaryHeap.insert(10);
-        binaryHeap.insert(5);
-        binaryHeap.insert(15);
-        binaryHeap.insert(1);
-        binaryHeap.extractNode();
-        binaryHeap.levelOrderTraversal();
+        Trie trie = new Trie();
+        trie.insert("cat");
+        trie.insert("car");
+        System.out.print(trie.search("ca"));
     }
 }

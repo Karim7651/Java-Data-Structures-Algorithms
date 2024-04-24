@@ -139,4 +139,7 @@ public class BinaryHeap {
             return extractedValue;
         }
     }
+    public void deleteBinaryHeap(){
+        arr = null;
+    }
 }
