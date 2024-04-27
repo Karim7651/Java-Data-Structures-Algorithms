@@ -29,7 +29,7 @@ public class GraphAdjacencyMatrix {
             }
             s.append("\n");
         }
-        return s.toString();
+        return s.toString() ;
     }
 
 

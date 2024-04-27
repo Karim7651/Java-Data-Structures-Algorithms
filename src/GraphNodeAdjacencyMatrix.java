@@ -4,6 +4,6 @@ public class GraphNodeAdjacencyMatrix {
 
     public GraphNodeAdjacencyMatrix(String name, int index){
         this.name = name;
-        this.index = index;
+        this.index = index ;
     }
 }

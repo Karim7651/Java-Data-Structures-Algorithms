@@ -6,6 +6,6 @@ public class GraphNodeAdjacencyList {
     ArrayList<GraphNodeAdjacencyList> neighbors = new ArrayList<>();
     public GraphNodeAdjacencyList(String name,int index){
         this.name = name;
-        this.index = index;
+        this.index = index ;
     }
 }

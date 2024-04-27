@@ -11,7 +11,7 @@ public class GraphAdjacencyList {
         GraphNodeAdjacencyList first = nodeList.get(fromIndex);
         GraphNodeAdjacencyList second = nodeList.get(toIndex);
         first.neighbors.add(second);
-        second.neighbors.add(first);
+        second.neighbors.add(first) ;
     }
 
 
