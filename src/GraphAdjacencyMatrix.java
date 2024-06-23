@@ -1,18 +1,84 @@
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class GraphAdjacencyMatrix {
-    ArrayList<GraphNodeAdjacencyMatrix> nodeList ;
+    //reference to all nodes in graph
+    ArrayList<GraphNodeAdjacencyMatrix> nodeList;
+    //adjacencyMatrix for the whole graph
     int[][] adjacencyMatrix;
 
-    public GraphAdjacencyMatrix(ArrayList<GraphNodeAdjacencyMatrix> nodeList){
+    public GraphAdjacencyMatrix(ArrayList<GraphNodeAdjacencyMatrix> nodeList) {
         this.nodeList = nodeList;
         this.adjacencyMatrix = new int[nodeList.size()][nodeList.size()];
     }
 
     //goes both ways
-    public void addUndirectedEdge(int indexFrom, int indexTo){
+    public void addUndirectedEdge(int indexFrom, int indexTo) {
         adjacencyMatrix[indexFrom][indexTo] = 1;
         adjacencyMatrix[indexTo][indexFrom] = 1;
+    }
+
+    public ArrayList<GraphNodeAdjacencyMatrix> getNeighbors(GraphNodeAdjacencyMatrix node) {
+        ArrayList<GraphNodeAdjacencyMatrix> neighbors = new ArrayList<>();
+        int nodeIndex = node.index;
+        for (int i = 0; i < adjacencyMatrix.length; i++) {
+            if (adjacencyMatrix[nodeIndex][i] == 1) {
+                neighbors.add(nodeList.get(i));
+            }
+        }
+        return neighbors;
+    }
+
+    public void bfsVisit(GraphNodeAdjacencyMatrix node) {
+        Queue<GraphNodeAdjacencyMatrix> queue = new LinkedList<>();
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            GraphNodeAdjacencyMatrix currentNode = queue.remove();
+            currentNode.isVisited = true;
+            System.out.print(currentNode.name + " ");
+            ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(currentNode);
+            for (GraphNodeAdjacencyMatrix neighborNode : neighbors) {
+                if (!neighborNode.isVisited) {
+                    queue.add(neighborNode);
+                    neighborNode.isVisited = true;
+                }
+            }
+        }
+    }
+
+    public void bfs() {
+        for (GraphNodeAdjacencyMatrix node : nodeList) {
+            if (!node.isVisited) {
+                bfsVisit(node);
+            }
+        }
+    }
+
+    public void dfsVisit(GraphNodeAdjacencyMatrix node) {
+        Stack<GraphNodeAdjacencyMatrix> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            GraphNodeAdjacencyMatrix currentNode = stack.pop();
+            currentNode.isVisited = true;
+            System.out.print(currentNode.name + " ");
+            ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(currentNode);
+            for(GraphNodeAdjacencyMatrix neighbor : neighbors){
+                if(!neighbor.isVisited){
+                    neighbor.isVisited=true;
+                    stack.push(neighbor);
+                }
+            }
+        }
+    }
+
+    public void dfs() {
+        for (GraphNodeAdjacencyMatrix node : nodeList) {
+            if (!node.isVisited) {
+                dfsVisit(node);
+            }
+        }
     }
 
     public String toString() {
@@ -29,9 +95,8 @@ public class GraphAdjacencyMatrix {
             }
             s.append("\n");
         }
-        return s.toString() ;
+        return s.toString();
     }
-
 
 
 }
