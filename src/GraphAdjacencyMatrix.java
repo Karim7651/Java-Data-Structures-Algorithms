@@ -19,6 +19,9 @@ public class GraphAdjacencyMatrix {
         adjacencyMatrix[indexFrom][indexTo] = 1;
         adjacencyMatrix[indexTo][indexFrom] = 1;
     }
+    public void addDirectedEdge(int fromIndex , int toIndex){
+        adjacencyMatrix[fromIndex][toIndex] = 1;
+    }
 
     public ArrayList<GraphNodeAdjacencyMatrix> getNeighbors(GraphNodeAdjacencyMatrix node) {
         ArrayList<GraphNodeAdjacencyMatrix> neighbors = new ArrayList<>();
@@ -78,6 +81,25 @@ public class GraphAdjacencyMatrix {
             if (!node.isVisited) {
                 dfsVisit(node);
             }
+        }
+    }
+    void topologicalVisit(GraphNodeAdjacencyMatrix node , Stack<GraphNodeAdjacencyMatrix> stack){
+        ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(node);
+        for(GraphNodeAdjacencyMatrix neighbor : neighbors){
+            if(!neighbor.isVisited){
+                topologicalVisit(neighbor,stack);
+            }
+            node.isVisited=true;
+            stack.push(node);
+        }
+    }
+    void topologicalSort(){
+        Stack<GraphNodeAdjacencyMatrix> stack = new Stack<>();
+        for(GraphNodeAdjacencyMatrix node : nodeList){
+            topologicalVisit(node,stack);
+        }
+        while(!stack.isEmpty()){
+            System.out.print(stack.pop().name + " ");
         }
     }
 

@@ -17,6 +17,11 @@ public class GraphAdjacencyList {
         first.neighbors.add(second);
         second.neighbors.add(first);
     }
+    public void addDirectedEdge(int fromIndex,int toIndex){
+        GraphNodeAdjacencyList first = nodeList.get(fromIndex);
+        GraphNodeAdjacencyList second = nodeList.get(toIndex);
+        first.neighbors.add(second);
+    }
 
     public void bfsVisit(GraphNodeAdjacencyList node) {
         Queue<GraphNodeAdjacencyList> queue = new LinkedList<>();
@@ -70,6 +75,30 @@ public class GraphAdjacencyList {
         }
     }
 
+    //if vertex depends on current vertex => go to that vertex then backtrack
+    //else push to stack and mark as visited
+    public void topologicalVisit(GraphNodeAdjacencyList node , Stack<GraphNodeAdjacencyList> stack){
+        for(GraphNodeAdjacencyList neighbor : node.neighbors){
+            if(!neighbor.isVisited){
+                topologicalVisit(neighbor,stack);
+            }
+            node.isVisited=true;
+            stack.push(node);
+        }
+    }
+
+    public void topologicalSort(){
+        Stack<GraphNodeAdjacencyList> stack = new Stack<>();
+        for(GraphNodeAdjacencyList node : nodeList){
+            if(!node.isVisited){
+                topologicalVisit(node,stack);
+            }
+        }
+        //print topological solution
+        while(!stack.isEmpty()){
+            System.out.print(stack.pop().name + " ");
+        }
+    }
 
     public String toString() {
         StringBuilder s = new StringBuilder();
