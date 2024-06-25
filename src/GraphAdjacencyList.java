@@ -99,6 +99,32 @@ public class GraphAdjacencyList {
             System.out.print(stack.pop().name + " ");
         }
     }
+    //for sssp
+    public static void printPath(GraphNodeAdjacencyList node){
+        if(node.parent != null){
+            printPath(node.parent);
+        }
+        System.out.print(node.name + " ");
+    }
+    public void BFSForSSSP(GraphNodeAdjacencyList node){
+        Queue<GraphNodeAdjacencyList> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()){
+            GraphNodeAdjacencyList currentNode = queue.remove();
+            currentNode.isVisited = true;
+            System.out.print("Printing path for node " + currentNode.name + ": ");
+            printPath(currentNode);
+            System.out.println();
+            for(GraphNodeAdjacencyList neighbor : currentNode.neighbors){
+                if(!neighbor.isVisited){
+                    neighbor.isVisited=true;
+                    queue.add(neighbor);
+                    neighbor.parent = currentNode;
+                }
+            }
+        }
+    }
+
 
     public String toString() {
         StringBuilder s = new StringBuilder();

@@ -102,6 +102,31 @@ public class GraphAdjacencyMatrix {
             System.out.print(stack.pop().name + " ");
         }
     }
+    public static void printPath(GraphNodeAdjacencyMatrix node){
+        if(node.parent != null){
+            printPath(node.parent);
+        }
+        System.out.print(node.name + " ");
+    }
+    public void BFSForSSSP(GraphNodeAdjacencyMatrix node){
+        Queue<GraphNodeAdjacencyMatrix> queue = new LinkedList<>();
+        queue.add(node);
+        while(!queue.isEmpty()){
+            GraphNodeAdjacencyMatrix currentNode = queue.remove();
+            currentNode.isVisited = true;
+            System.out.print("Printing path for node" + currentNode.name + " ");
+            printPath(currentNode);
+            System.out.println();
+            ArrayList<GraphNodeAdjacencyMatrix> neighbors = getNeighbors(currentNode);
+            for(GraphNodeAdjacencyMatrix neighbor :  neighbors){
+                if(!neighbor.isVisited){
+                    queue.add(neighbor);
+                    neighbor.isVisited = true;
+                    neighbor.parent=currentNode;
+                }
+            }
+        }
+    }
 
     public String toString() {
         StringBuilder s = new StringBuilder();
