@@ -125,6 +125,26 @@ public class GraphAdjacencyList {
         }
     }
 
+    //route between two nodes exist ?
+    public static boolean nodesRoute(GraphNodeAdjacencyList source , GraphNodeAdjacencyList dest){
+        Queue<GraphNodeAdjacencyList> queue = new LinkedList<>();
+        queue.add(source);
+        while(!queue.isEmpty()){
+            GraphNodeAdjacencyList currentNode = queue.remove();
+            for(GraphNodeAdjacencyList neighbor : currentNode.neighbors){
+                //if neighbour
+                if(!neighbor.isVisited){
+                    if(neighbor == dest)
+                        return true;
+                    queue.add(neighbor);
+                }
+            }
+            currentNode.isVisited = true;
+        }
+
+        return false;
+    }
+
 
     public String toString() {
         StringBuilder s = new StringBuilder();
@@ -141,4 +161,5 @@ public class GraphAdjacencyList {
         }
         return s.toString();
     }
+
 }
