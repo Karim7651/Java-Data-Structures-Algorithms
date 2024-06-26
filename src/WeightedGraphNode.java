@@ -12,6 +12,8 @@ public class WeightedGraphNode implements Comparable<WeightedGraphNode> {
     int distance;
     ArrayList<WeightedGraphNode> neighbors = new ArrayList<>();
     HashMap<WeightedGraphNode,Integer> weightMap = new HashMap<>();
+    //for disjoint set only
+    public DisjointSet set;
 
     public WeightedGraphNode(String name, int index){
         this.name = name;
