@@ -5,14 +5,12 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        ArrayList<KnapsackItem> items = new ArrayList<>();
-        int[] value = {100,120,60};
-        int[] weight ={20,30,10};
-        int capacity = 50;
-        for(int i = 0 ; i < 3 ; i++){
-            items.add(new KnapsackItem(i+1,value[i],weight[i]));
-        }
-        GreedyAlgorithms.fractionalKnapsack(items,capacity);
-
+        int[][] x = {
+                {4,7,1,6},
+                {5,7,3,9},
+                {3,2,1,2},
+                {7,1,6,3}
+        };
+        System.out.println(DivideAndConquer.numberOfPathsToReachLastCellWithGivenCost(x,0,0,25));
     }
 }
